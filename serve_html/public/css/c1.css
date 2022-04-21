@@ -1,0 +1,17 @@
+* { 
+    background-color: azure;
+}
+tr, td {
+    padding: 15px;
+    margin: 15px;
+    background-color: white;
+}
+table {
+    vertical-align: middle;
+    padding: 15px;
+    margin: 15px;
+    background-color: rgba(229, 226, 226, 0.719);
+}
+a:hover {
+    color:rgb(133, 220, 231);
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+        <link href="css\c1.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <h3>Click on any book to see details</h3>
+        <table>
+            <tr>
+                <% books.forEach(s=>
+                    { %> 
+                    <tr>
+                        <td>
+                            <a href=books/<%= s.booknumber%>><%= s.title %></a>
+                        </td>
+                    </tr>
+                    <% });
+                %>
+            </tr>
+        </table>
+    </body>
+</html>

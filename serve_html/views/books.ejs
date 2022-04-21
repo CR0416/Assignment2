@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+        <link href="..\css\c1.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <h3><%= books.title %></h3>
+        <table>
+            <tr>
+                <tr>
+                    <td>
+                        Author: <%= books.author %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href=<%= books.url %>>Buy on Amazon!</a>
+                    </td>
+                </tr>
+            </tr>
+        </table>
+    </body>
+</html>
