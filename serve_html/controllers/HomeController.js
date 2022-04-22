@@ -23,18 +23,63 @@ exports.logRequestPaths =(req, res, next) => {
 };
 
 exports.reqBooks = (req, res, next) => {
-    let id = req.params.bookNumber;
-    Book.findOne({"bookid": id}, (error, books) => {
+    let id = req.params.id;
+    Book.findOne({"id": id}, (error, books) => {
         if (error) next(error);
         req.data = books;
         next();
     });
 };
 
-exports.getBooks = (req, res, next) => {
+exports.getBooks= (req, res, next) => {
     Book.find({}, (error, books) => {
         if (error) next(error);
         req.data = books;
+        next();
+    });
+};
+
+exports.new = (req, res) => {
+    res.render("AddNewBook");
+};
+exports.create = (req, res) => {
+    let bookParams = {
+        title: req.body.title,
+        author: req.body.author,
+        url: req.body.url,
+    };
+    if (bookParams.title == null || bookParams.author == null || bookParams.url == null) {
+        res.send("All fields are required")
+    }
+    else {
+    Book.create(bookParams)
+        .then(books => {
+            res.locals.redirect = "/home";
+            res.locals.books = books;
+            next();
+        })
+        .catch(error => {
+            console.log(`Error adding book: ${error.message}`);
+            next(error);
+        });
+    };
+};
+
+exports.redirectView = (req, res, next) => {
+        let redirectPath = res.locals.redirect;
+        if (redirectPath) res.redirect(redirectPath);
+        else next();
+    };
+
+exports.delete = (req, res, next) => {
+    let BookID = req.params.id;
+    Book.findByIdAndRemove(BookID)
+    .then(() => {
+        res.redirect("/home");
+        next();
+    })
+    .catch(error => {
+        console.log(`Error deleting book by ID: ${error.message}`);
         next();
     });
 };

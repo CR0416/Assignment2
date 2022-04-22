@@ -6,13 +6,14 @@
     </head>
     <body>
     <h3>Add a New Book</h3>
-    <form>
-    <label>Name: <br />
-        <input type="text" name="Name" /></label><br />
+    <form action="create" method="POST">
+    <label>Title: <br />
+        <input type="text" id="title" required></label><br /> 
+        <!-- https://www.w3schools.com/tags/att_input_required.asp -->
     <label>Author's Name: <br />
-        <input type="text" name="author" /></label><br />
+        <input type="text"id="author" required></label><br />
     <label>Amazon Link: <br />
-        <input type="text" name="link" /></label><br /><br />
+        <input type="text" id="url" required></label><br /><br />
         <input type="button" id=submit value="Submit"><br /><br />
     </form>
     <%- include ('./partials/nav.ejs') %>    

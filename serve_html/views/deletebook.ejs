@@ -5,6 +5,21 @@
         <link href="..\css\c1.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
+        <h3>Delete A Book</h3>
+        <p>To delete a book, click on the Red X button</p>
+        <table>
+            <tr>
+                <% books.forEach(s=>
+                    { %> 
+                    <tr>
+                        <td>
+                            <a href="<%= `books/${s._id}/delete?_method=DELETE` %>" id="redX" onclick="return confirm('Are you sure you want to delete this book?')">X</a><%= s.title %>
+                        </td>
+                    </tr>
+                    <% });
+                %>
+            </tr>
+        </table><br/>
     <%- include ('./partials/nav.ejs') %>    
 </body>
 </html>

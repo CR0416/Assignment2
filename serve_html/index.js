@@ -2,9 +2,11 @@ const express = require("express")
 const app = express();
 const homeController = require("./controllers/HomeController");
 const httpStatus = require("http-status-codes");
-const Book = require("./models/books")
 const mongoose = require("mongoose");
 const books = require("./models/books");
+const methodOverride = require("method-override");
+
+app.use(methodOverride("_method", {methods: ["POST", "GET"]}));
 
 app.set("port", process.env.PORT || 3000);
 app.use(
@@ -26,12 +28,15 @@ db.once("open", () => {
 });
 //insert items to the db
 // books.create({
-//     title: "The Hunger Games",
+//     title: "TheHungerGames",
 //     author: "Suzanne Collins",
-//     bookid:"1",
-//     url: "https://www.amazon.ca/Hunger-Games-Suzanne-Collins/dp/0439023521/ref=pd_bxgy_img_sccl_2/134-2452071-0386103?pd_rd_w=lALb6&pf_rd_p=19eafb8a-881a-44bb-9725-85a79b8c53d4&pf_rd_r=6YGXN41JKVRP7YBKN4MN&pd_rd_r=46c6b2ae-4067-417d-a01f-3688db9ab98e&pd_rd_wg=7Akw0&pd_rd_i=0439023521&psc=1",
-
+//     url: "https://www.amazon.com/dp/B07HHJ7669?plink=kWJK38TQ7sXR7Rue&ref_=adblp13nvvxx_0_1_im",
 // },
+// books.create({
+//         title: "Catching Fire",
+//         author: "Suzanne Collins",
+//         url: "https://www.amazon.ca/Catching-Fire-Second-Hunger-Games/dp/0545586178/ref=pd_bxgy_img_sccl_1/134-2452071-0386103?pd_rd_w=VFjBj&pf_rd_p=19eafb8a-881a-44bb-9725-85a79b8c53d4&pf_rd_r=VXCD7W6AYA6XF4EYD635&pd_rd_r=9f67af23-9c64-4780-8f2c-188259a8afcb&pd_rd_wg=eBHWn&pd_rd_i=0545586178&psc=1",
+//     },
 //     function (error,savedDocument) {
 //         if (error) console.log(error);
 //         console.log(savedDocument);
@@ -83,14 +88,14 @@ app.get(
         res.render("books", { books: req.data});
     }
 );
-app.get(
-    "/AddNewBook", 
-    homeController.getBooks,
-    (req, res, next) => {
-        console.log(req.data);
-        res.render("addbook", { books: req.data});
-    }
-);
+// app.get(
+//     "/AddNewBook", 
+//     homeController.getBooks,
+//     (req, res, next) => {
+//         console.log(req.data);
+//         res.render("AddNewBook", { books: req.data});
+//     }
+// );
 
 app.get(
     "/DeleteABook", 
@@ -101,18 +106,9 @@ app.get(
     }
 );
 
-
-app.post("/", (req, res) => {
-    res.writeHead(httpStatus.StatusCodes.OK, plainTextContentType);
-    res.end("POSTED");
-});
-
-
-app.use(homeController.logRequestPaths);
-app.use(homeController.respondNoResourceFound);
-app.use(homeController.respondInternalError);
-
-
+app.get("/AddNewBook", homeController.new);
+app.post("/create", homeController.create, homeController.redirectView);
+app.delete("/books/:id/delete", homeController.delete, homeController.redirectView);
 
 app.listen( app.get("port"), () => {
     console.log(`The server has started at http://localhost:${app.get("port")}`);
