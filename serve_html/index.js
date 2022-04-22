@@ -37,6 +37,16 @@ db.once("open", () => {
 //         author: "Suzanne Collins",
 //         url: "https://www.amazon.ca/Catching-Fire-Second-Hunger-Games/dp/0545586178/ref=pd_bxgy_img_sccl_1/134-2452071-0386103?pd_rd_w=VFjBj&pf_rd_p=19eafb8a-881a-44bb-9725-85a79b8c53d4&pf_rd_r=VXCD7W6AYA6XF4EYD635&pd_rd_r=9f67af23-9c64-4780-8f2c-188259a8afcb&pd_rd_wg=eBHWn&pd_rd_i=0545586178&psc=1",
 //     },
+// books.create({
+//             title: "Mockingjay",
+//             author: "Suzanne Collins",
+//             url: "https://www.amazon.ca/Catching-Fire-Second-Hunger-Games/dp/0545586178/ref=pd_bxgy_img_sccl_1/134-2452071-0386103?pd_rd_w=VFjBj&pf_rd_p=19eafb8a-881a-44bb-9725-85a79b8c53d4&pf_rd_r=VXCD7W6AYA6XF4EYD635&pd_rd_r=9f67af23-9c64-4780-8f2c-188259a8afcb&pd_rd_wg=eBHWn&pd_rd_i=0545586178&psc=1",
+//         },
+// books.create({
+//             title: "The Paper Palace: A Novel",
+//             author: "Miranda Cowley Heller",
+//             url: "https://www.amazon.ca/Paper-Palace-Miranda-Cowley-Heller/dp/0593419073/ref=sr_1_14?crid=N6GYN4BCU215&keywords=books&qid=1650658158&sprefix=book%2Caps%2C103&sr=8-14",
+//         },
 //     function (error,savedDocument) {
 //         if (error) console.log(error);
 //         console.log(savedDocument);
@@ -88,14 +98,6 @@ app.get(
         res.render("books", { books: req.data});
     }
 );
-// app.get(
-//     "/AddNewBook", 
-//     homeController.getBooks,
-//     (req, res, next) => {
-//         console.log(req.data);
-//         res.render("AddNewBook", { books: req.data});
-//     }
-// );
 
 app.get(
     "/DeleteABook", 

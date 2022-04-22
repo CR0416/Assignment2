@@ -48,7 +48,8 @@ exports.create = (req, res) => {
         author: req.body.author,
         url: req.body.url,
     };
-    if (bookParams.title == null || bookParams.author == null || bookParams.url == null) {
+    ///makes suure that all fields are filled if not send an error message
+    if (bookParams.title == null || bookParams.author == null || bookParams.url == null) {    
         res.send("All fields are required")
     }
     else {
