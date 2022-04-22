@@ -83,6 +83,24 @@ app.get(
         res.render("books", { books: req.data});
     }
 );
+app.get(
+    "/AddNewBook", 
+    homeController.getBooks,
+    (req, res, next) => {
+        console.log(req.data);
+        res.render("addbook", { books: req.data});
+    }
+);
+
+app.get(
+    "/DeleteABook", 
+    homeController.getBooks,
+    (req, res, next) => {
+        console.log(req.data);
+        res.render("deletebook", { books: req.data});
+    }
+);
+
 
 app.post("/", (req, res) => {
     res.writeHead(httpStatus.StatusCodes.OK, plainTextContentType);
